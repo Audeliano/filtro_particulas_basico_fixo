@@ -9,6 +9,7 @@
 #include "geometry_msgs/PoseArray.h"
 
 #include "map_server/image_loader.h"
+#include "nav_msgs/GetMap.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -19,6 +20,7 @@
 #include <random>
 #include <cmath>
 #include <cstdlib>
+#include <chrono>
 
 #include "std_msgs/MultiArrayLayout.h"
 #include "std_msgs/MultiArrayDimension.h"
@@ -36,7 +38,7 @@ using namespace std;
 class Filtro_Particulas
 {
 	public:
-		Filtro_Particulas(ros::NodeHandle n, double res);
+		Filtro_Particulas(ros::NodeHandle n);
 		virtual ~Filtro_Particulas();
 
 	public:
@@ -57,6 +59,7 @@ class Filtro_Particulas
 		void laserCallback (const sensor_msgs::LaserScanConstPtr& scan);
 		void occ_coordxyCallback (const std_msgs::Int32MultiArray::ConstPtr& occ_coordxy);
 		void free_coordxyCallback (const std_msgs::Int32MultiArray::ConstPtr& free_coordxy);
+		void mapCallback (const nav_msgs::MapMetaDataConstPtr& msg);
 
 		void pubInicialPose();
 		void cloud();
@@ -72,6 +75,7 @@ class Filtro_Particulas
 		ros::Subscriber scan_sub_;
 		ros::Subscriber occ_coordxy_sub_;
 		ros::Subscriber free_coordxy_sub_;
+		ros::Subscriber map_meta_data_sub_;
 
 		ros::Publisher particle_cloud_pub_;
 		ros::Publisher initial_pose_pub_;
@@ -85,7 +89,10 @@ class Filtro_Particulas
 		filtro_particulas::energia energia_grid_[50000];
 		filtro_particulas::pose pose_grid_[50000];
 
+		double map_meta_data_;
 		double res_;
+		double map_position_x_;
+		double map_position_y_;
 
 		int num_part_;
 		int qtdd_laser_;
@@ -138,6 +145,7 @@ class Filtro_Particulas
 
 		double laser_data_[1000];
 		double ang_min_;
+		double max_laser_range_;
 		double pose_x_;
 		double pose_y_;
 		double pose_theta_;
@@ -152,6 +160,7 @@ class Filtro_Particulas
 		double weight_part_[10000];
 		double pool_[10000];
 		double weight_ord_[10000];
+		double max_w_;
 
 		bool free_ok_;
 		bool occ_ok_;
