@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(filtro_particulas)
+project(filtro_particulas_simples)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
@@ -108,16 +108,16 @@ ${Boost_INCLUDE_DIRS})
 # )
 
 ## Declare a cpp executable
-add_executable(filtro_particulas
-		src/filtro_particulas.cpp
-		src/filtro_particulas_node.cpp)
+add_executable(filtro_particulas_simples
+		src/filtro_particulas_simples.cpp
+		src/filtro_particulas_simples_node.cpp)
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
 # add_dependencies(filtro_particulas_node filtro_particulas_generate_messages_cpp)
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(filtro_particulas
+target_link_libraries(filtro_particulas_simples
   ${catkin_LIBRARIES})
 
 set (CMAKE_CXX_FLAGS "-std=c++0x")

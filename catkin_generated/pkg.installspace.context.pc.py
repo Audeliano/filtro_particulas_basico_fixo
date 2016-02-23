@@ -3,6 +3,6 @@ CATKIN_PACKAGE_PREFIX = ""
 PROJECT_PKG_CONFIG_INCLUDE_DIRS = "/home/au/catkin_ws/install/include".split(';') if "/home/au/catkin_ws/install/include" != "" else []
 PROJECT_CATKIN_DEPENDS = "message_runtime".replace(';', ' ')
 PKG_CONFIG_LIBRARIES_WITH_PREFIX = "".split(';') if "" != "" else []
-PROJECT_NAME = "filtro_particulas"
+PROJECT_NAME = "filtro_particulas_simples"
 PROJECT_SPACE_DIR = "/home/au/catkin_ws/install"
 PROJECT_VERSION = "0.0.0"
